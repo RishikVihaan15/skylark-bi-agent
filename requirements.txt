@@ -1,0 +1,6 @@
+streamlit>=1.38
+groq>=0.9
+requests>=2.32
+pandas>=2.2
+python-dateutil>=2.9
+python-dotenv>=1.0
