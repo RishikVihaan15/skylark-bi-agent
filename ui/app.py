@@ -4,8 +4,17 @@ import sys
 import streamlit as st
 from dotenv import load_dotenv
 
-# Load .env from the project root (one level above ui/)
+# Load .env locally; on Streamlit Cloud, secrets come from st.secrets
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
+
+# Inject Streamlit secrets into os.environ so the rest of the code works unchanged
+try:
+    import streamlit as _st
+    for _k, _v in _st.secrets.items():
+        if _k not in os.environ:
+            os.environ[_k] = str(_v)
+except Exception:
+    pass
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
